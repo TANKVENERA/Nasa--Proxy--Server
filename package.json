@@ -2,8 +2,9 @@
   "name": "nasa--proxy--server",
   "version": "1.0.0",
   "description": "NASA API Integration Example",
-  "main": "proxy_server.js",
+  "main": "index.js",
   "dependencies": {
+    "axios": "^1.7.7",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "os": "^0.1.2"
