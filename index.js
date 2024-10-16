@@ -2,6 +2,14 @@ const config = require('./app/config/config')
 const express = require('express');
 const app = express();
 const errorHandler = require('./app/middleware/errorHandler/errorHandler')
+const nunjucks = require('nunjucks')
+
+nunjucks.configure('./app/views', {
+    autoescape: true,
+    express: app
+})
+
+app.set('view engine', 'html')
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const serverPort = config.port
