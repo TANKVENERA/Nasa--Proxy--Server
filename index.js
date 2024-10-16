@@ -16,9 +16,11 @@ const serverPort = config.port
 
 const indexRoute = require('./app/routes/index');
 const meteorRoutes = require('./app/routes/meteorsRoute');
+const photoRoutes = require('./app/routes/photoRoute');
 const pageNotFoundRoute = require('./app/routes/pageNotFoundRoute')
 
 app.use('/proxy', meteorRoutes)
+app.use('/proxy', photoRoutes)
 app.use('/proxy', indexRoute)
 app.use(errorHandler)
 app.use(pageNotFoundRoute)

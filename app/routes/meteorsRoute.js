@@ -1,10 +1,10 @@
-const useCase = require('../useCases/meteorsUseCase')
+const useCase = require('../useCases/meteorsUseCase');
 const express = require('express');
 const router = express.Router();
-const NasaProxyException = require('../middleware/errorHandler/nasaProxyException')
-const util = require('../util/util')
-const parseDates = util.parseDates
-const parseStringToBoolean = util.parseStringToBoolean
+const NasaProxyException = require('../middleware/errorHandler/nasaProxyException');
+const util = require('../util/util');
+const parseDates = util.parseDates;
+const parseStringToBoolean = util.parseStringToBoolean;
 
 /**
  * Get meteors
@@ -17,18 +17,18 @@ const parseStringToBoolean = util.parseStringToBoolean
  */
 router.get('/meteors', async (req, res, next) => {
     try {
-        const parsedDates = parseDates(req.query.dateFrom, req.query.dateTo)
-        const dateFrom = parsedDates.dateFrom
-        const dateTo = parsedDates.dateTo
-        const isTotalAmountRequired = parseStringToBoolean(req.query.isTotalAmountRequired)
-        const wereDangerousMeteorsRequired = parseStringToBoolean(req.query.wereDangerousMeteorsRequired)
+        const parsedDates = parseDates(req.query.dateFrom, req.query.dateTo);
+        const dateFrom = parsedDates.dateFrom;
+        const dateTo = parsedDates.dateTo;
+        const isTotalAmountRequired = parseStringToBoolean(req.query.isTotalAmountRequired);
+        const wereDangerousMeteorsRequired = parseStringToBoolean(req.query.wereDangerousMeteorsRequired);
 
-        const meteorsData = await useCase.getMeteors(isTotalAmountRequired, wereDangerousMeteorsRequired, dateFrom, dateTo)
+        const meteorsData = await useCase.getMeteors(isTotalAmountRequired, wereDangerousMeteorsRequired, dateFrom, dateTo);
 
-        res.render('../views/meteorsView.html', {meteorsData, dateFrom, dateTo})
+        res.render('../views/meteorsView.html', {meteorsData, dateFrom, dateTo});
     }
     catch (err) {
-        next(new NasaProxyException(err.status, `Downstream error: ${err.message}`))
+        next(new NasaProxyException(err.status, `Downstream error: ${err.message}`));
     }
 });
 

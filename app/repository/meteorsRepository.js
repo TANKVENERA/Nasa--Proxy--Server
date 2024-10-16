@@ -1,12 +1,12 @@
-const config = require('../config/config')
+const config = require('../config/config');
 const axios = require('axios');
 const path = require('path');
 
-const baseUrl = config.apiUrl || 'https://api.nasa.gov'
-const apiKey = config.apiKey || 'DEMO_KEY'
-const apiPath = 'neo/rest/v1/feed';
-
 const fetchMeteors = async (dateFrom, dateTo) => {
+    const baseUrl = config.apiUrl || 'https://api.nasa.gov';
+    const apiKey = config.apiKey || 'DEMO_KEY';
+    const apiPath = 'neo/rest/v1/feed';
+
     const apiUrl = new URL(path.join(apiPath), baseUrl);
     apiUrl.searchParams.append("api_key", apiKey);
     apiUrl.searchParams.append("start_date", dateFrom);

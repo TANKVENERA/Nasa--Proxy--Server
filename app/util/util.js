@@ -11,7 +11,7 @@ const parseDates = (dateFrom, dateTo) => {
         return {dateFrom: getDate(dateTo, -7), dateTo: dateTo}
     }
     else if (!dateTo && dateFrom) {
-        return {dateFrom: dateFrom, dateTo: getDate(dateTo, 7)}
+        return {dateFrom: dateFrom, dateTo: getDate(dateFrom, 7)}
     }
     return {dateFrom: dateFrom, dateTo: dateTo}
 }
@@ -24,7 +24,6 @@ const getDate = (date, days) => {
     } else {
         res = new Date();
     }
-
 
     return res.toISOString().split('T')[0];
 }
