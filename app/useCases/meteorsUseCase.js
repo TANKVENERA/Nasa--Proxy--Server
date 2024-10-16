@@ -7,7 +7,7 @@ const getMeteors = async (isTotalAmountRequired, wereDangerousMeteorsRequired, d
     const nearEarthObjects = fetchedMeteors.data.near_earth_objects;
 
     let wereDangerousMeteors = false;
-    let result = {meteors: []};
+    let meteorsData = {meteors: []};
 
     for (const date in nearEarthObjects) {
         const meteorsGroupedByDate = nearEarthObjects[date].map(meteor => {
@@ -26,17 +26,17 @@ const getMeteors = async (isTotalAmountRequired, wereDangerousMeteorsRequired, d
             }
         );
 
-        result.meteors = result.meteors.concat(meteorsGroupedByDate);
+        meteorsData.meteors = meteorsData.meteors.concat(meteorsGroupedByDate);
     }
 
-    if (isTotalAmountRequired === 'true') {
-       result.totalCount = result.meteors.length;
+    if (isTotalAmountRequired) {
+       meteorsData.totalCount = meteorsData.meteors.length;
     }
-    if (wereDangerousMeteorsRequired === 'true') {
-        result.wereDangerousMeteors = wereDangerousMeteors;
+    if (wereDangerousMeteorsRequired) {
+        meteorsData.wereDangerousMeteors = wereDangerousMeteors;
     }
 
-    return result;
+    return meteorsData;
 }
 
 module.exports = {getMeteors}
