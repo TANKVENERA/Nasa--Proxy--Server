@@ -1,5 +1,4 @@
 const repository = require('../repository/meteorsRepository')
-const axios = require('axios');
 
 
 const getMeteors = async (isTotalAmountRequired, wereDangerousMeteorsRequired, dateFrom, dateTo) => {

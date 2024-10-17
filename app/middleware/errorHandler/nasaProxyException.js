@@ -1,8 +1,8 @@
 class NasaProxyException extends Error {
     constructor (statusCode, message) {
-        super(message)
-        this.code = statusCode
-        this.name = this.constructor.name
+        super(message);
+        this.code = statusCode;
+        this.name = this.constructor.name;
     }
 }
 
