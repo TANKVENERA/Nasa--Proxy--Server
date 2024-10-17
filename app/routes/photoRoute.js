@@ -1,9 +1,9 @@
 const useCase = require('../useCases/photoUseCase');
 const express = require('express');
-const bodyParser = require('body-parser');
-const NasaProxyException = require("../middleware/exceptions/nasaProxyException");
-const ValidationException = require("../middleware/exceptions/validationException");
-const userDataValidator = require('../middleware/validators/userDataValidator');
+const NasaProxyError = require("../middleware/exceptions/nasaProxyError");
+const validator = require('../middleware/validators/schemaValidator');
+const userDataSchema = require('../middleware/validators/userDataSchema')
+
 const router = express.Router();
 
 /**
@@ -13,20 +13,13 @@ const router = express.Router();
  *
  * @returns photo: latest photo from the rover
  */
-router.post('/latestPhoto', bodyParser.json(), async (req, res, next) => {
+router.post('/latestPhoto', validator.validate(userDataSchema, 'body'), async (req, res, next) => {
     try {
-        const userData = req.body;
-        userDataValidator.validate(userData)
-        const userId = userData.userId;
-        const userName = userData.userName;
-
         const latestPhoto = await useCase.getLatestPhoto();
-        res.json(latestPhoto)
+
+        res.status(201).render('../views/photoView.html', {latestPhoto})
     } catch (err) {
-        if (err instanceof ValidationException) {
-            next(new NasaProxyException(err.code, `Validation error: ${err.message}`))
-        }
-        next(new NasaProxyException(err.status, `Downstream error: ${err.message}`))
+        next(new NasaProxyError(err.status, `Downstream error: ${err.message}`))
     }
 })
 
