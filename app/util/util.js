@@ -1,7 +1,3 @@
-const parseStringToBoolean = (str) => {
-    return str === "true" ? true : str === "false" ? false : undefined;
-}
-
 const parseDates = (dateFrom, dateTo) => {
     if (!dateFrom && !dateTo) {
         const nowDate = getDate();
@@ -28,7 +24,4 @@ const getDate = (date, days) => {
     return res.toISOString().split('T')[0];
 }
 
-module.exports = {
-    parseDates: parseDates,
-    parseStringToBoolean: parseStringToBoolean
-}
+module.exports = {parseDates}

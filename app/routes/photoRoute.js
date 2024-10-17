@@ -1,7 +1,9 @@
 const useCase = require('../useCases/photoUseCase');
 const express = require('express');
 const bodyParser = require('body-parser');
-const NasaProxyException = require("../middleware/errorHandler/nasaProxyException");
+const NasaProxyException = require("../middleware/exceptions/nasaProxyException");
+const ValidationException = require("../middleware/exceptions/validationException");
+const userDataValidator = require('../middleware/validators/userDataValidator');
 const router = express.Router();
 
 /**
@@ -13,13 +15,17 @@ const router = express.Router();
  */
 router.post('/latestPhoto', bodyParser.json(), async (req, res, next) => {
     try {
-        const userId = req.body.userId;
-        const userName = req.body.userName;
-        console.log('Validator to be added for:', userId, userName)
+        const userData = req.body;
+        userDataValidator.validate(userData)
+        const userId = userData.userId;
+        const userName = userData.userName;
 
         const latestPhoto = await useCase.getLatestPhoto();
         res.json(latestPhoto)
     } catch (err) {
+        if (err instanceof ValidationException) {
+            next(new NasaProxyException(err.code, `Validation error: ${err.message}`))
+        }
         next(new NasaProxyException(err.status, `Downstream error: ${err.message}`))
     }
 })
