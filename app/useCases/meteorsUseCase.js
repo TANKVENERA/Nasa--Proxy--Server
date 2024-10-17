@@ -1,8 +1,9 @@
 const repository = require('../repository/meteorsRepository')
-
+const util = require('../util/util');
 
 const getMeteors = async (isTotalAmountRequired, wereDangerousMeteorsRequired, dateFrom, dateTo) => {
-    const fetchedMeteors = await repository.fetchMeteors(dateFrom, dateTo);
+    const parseDates = util.parseDates(dateFrom, dateTo);
+    const fetchedMeteors = await repository.fetchMeteors(parseDates.dateFrom, parseDates.dateTo);
     const nearEarthObjects = fetchedMeteors.data.near_earth_objects;
 
     let wereDangerousMeteors = false;
