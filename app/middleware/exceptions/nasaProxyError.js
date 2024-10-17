@@ -1,4 +1,4 @@
-class NasaProxyException extends Error {
+class NasaProxyError extends Error {
     constructor (statusCode, message) {
         super(message);
         this.code = statusCode;
@@ -6,4 +6,4 @@ class NasaProxyException extends Error {
     }
 }
 
-module.exports = NasaProxyException
+module.exports = NasaProxyError
