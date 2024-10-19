@@ -1,8 +1,8 @@
-const useCase = require('../useCases/photoUseCase');
-const express = require('express');
+const useCase = require("../useCases/photoUseCase");
+const express = require("express");
 const NasaProxyError = require("../middleware/exceptions/nasaProxyError");
-const validator = require('../middleware/validators/schemaValidator');
-const userDataSchema = require('../middleware/validators/userDataSchema')
+const validator = require("../middleware/validators/schemaValidator");
+const userDataSchema = require("../middleware/validators/userDataSchema");
 
 const router = express.Router();
 
@@ -13,14 +13,18 @@ const router = express.Router();
  *
  * @returns photo: latest photo from the rover
  */
-router.post('/latestPhoto', validator.validate(userDataSchema, 'body'), async (req, res, next) => {
+router.post(
+  "/latestPhoto",
+  validator.validate(userDataSchema, "body"),
+  async (req, res, next) => {
     try {
-        const latestPhoto = await useCase.getLatestPhoto();
+      const latestPhoto = await useCase.getLatestPhoto();
 
-        res.status(201).render('../views/photoView.html', {latestPhoto})
+      res.status(201).render("../views/photoView.html", { latestPhoto });
     } catch (err) {
-        next(new NasaProxyError(err.status, `Downstream error: ${err.message}`))
+      next(new NasaProxyError(err.status, `Downstream error: ${err.message}`));
     }
-})
+  },
+);
 
-module.exports = router
+module.exports = router;
