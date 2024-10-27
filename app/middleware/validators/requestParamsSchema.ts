@@ -1,9 +1,9 @@
-const Joi = require("joi");
-const moment = require("moment");
+import Joi from "joi";
+import moment from "moment";
 
 const requestParamsSchema = Joi.object({
   dateFrom: Joi.string()
-    .custom((date, helpers) => {
+    .custom((date: string, helpers) => {
       if (!isDateFormatValid(date)) {
         return helpers.message({
           custom: `"dateFrom": "${date}" has wrong format. Valid format is: (YYYY-MM-DD)`,
@@ -14,7 +14,7 @@ const requestParamsSchema = Joi.object({
     .optional(),
 
   dateTo: Joi.string()
-    .custom((date, helpers) => {
+    .custom((date: string, helpers) => {
       if (!isDateFormatValid(date)) {
         return helpers.message({
           custom: `"dateTo": "${date}" has wrong format. Valid format is: (YYYY-MM-DD)`,
@@ -25,7 +25,7 @@ const requestParamsSchema = Joi.object({
     .optional(),
 
   isTotalAmountRequired: Joi.string()
-    .custom((flag, helpers) => {
+    .custom((flag: string, helpers) => {
       if (!isBoolean(flag)) {
         return helpers.message({
           custom: `"isTotalAmountRequired": "${flag}" has wrong value. Valid values are true/false`,
@@ -36,7 +36,7 @@ const requestParamsSchema = Joi.object({
     .optional(),
 
   wereDangerousMeteorsRequired: Joi.string()
-    .custom((flag, helpers) => {
+    .custom((flag: string, helpers) => {
       if (!isBoolean(flag)) {
         return helpers.message({
           custom: `"wereDangerousMeteorsRequired": "${flag}" has wrong value. Valid values are true/false`,
@@ -47,12 +47,12 @@ const requestParamsSchema = Joi.object({
     .optional(),
 }).options({ abortEarly: false });
 
-const isDateFormatValid = (date) => {
+const isDateFormatValid = (date: string) => {
   return moment(date, "YYYY-MM-DD", true).isValid();
 };
 
-const isBoolean = (flag) => {
+const isBoolean = (flag: string) => {
   return flag === "true" || flag === "false";
 };
 
-module.exports = requestParamsSchema;
+export { requestParamsSchema };

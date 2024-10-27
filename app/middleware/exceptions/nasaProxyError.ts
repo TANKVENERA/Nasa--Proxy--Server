@@ -1,9 +1,11 @@
 class NasaProxyError extends Error {
-  constructor(statusCode, message) {
+  code: number;
+
+  constructor(statusCode: number, message: string) {
     super(message);
     this.code = statusCode;
     this.name = this.constructor.name;
   }
 }
 
-module.exports = NasaProxyError;
+export { NasaProxyError };

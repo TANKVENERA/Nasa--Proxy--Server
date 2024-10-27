@@ -1,5 +1,5 @@
-const config = require("../config/config");
-const axios = require("axios");
+import { config } from "../config/config.js";
+import axios from "axios";
 
 const fetchPhotos = async () => {
   return await axios.get(
@@ -12,4 +12,4 @@ const fetchPhotos = async () => {
   );
 };
 
-module.exports = { fetchPhotos: fetchPhotos };
+export { fetchPhotos };
