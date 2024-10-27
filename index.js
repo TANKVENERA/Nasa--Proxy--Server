@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const errorHandler = require('./app/middleware/errorHandler/errorHandler')
 const nunjucks = require('nunjucks')
+const bodyParser = require('body-parser');
 
 nunjucks.configure('./app/views', {
     autoescape: true,
@@ -19,6 +20,7 @@ const meteorRoutes = require('./app/routes/meteorsRoute');
 const photoRoutes = require('./app/routes/photoRoute');
 const pageNotFoundRoute = require('./app/routes/pageNotFoundRoute')
 
+app.use(bodyParser.urlencoded({extended: true}))
 app.use('/proxy', meteorRoutes)
 app.use('/proxy', photoRoutes)
 app.use('/proxy', indexRoute)

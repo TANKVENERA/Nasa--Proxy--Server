@@ -1,9 +1,9 @@
 const useCase = require('../useCases/meteorsUseCase');
 const express = require('express');
 const router = express.Router();
-const NasaProxyException = require('../middleware/exceptions/nasaProxyException');
-const ValidationException = require("../middleware/exceptions/validationException");
-const requestParamsValidator = require('../middleware/validators/requestParamsValidator');
+const NasaProxyError = require('../middleware/exceptions/nasaProxyError');
+const validator = require('../middleware/validators/schemaValidator');
+const requestParamsSchema = require('../middleware/validators/requestParamsSchema')
 
 /**
  * Get meteors
@@ -14,23 +14,19 @@ const requestParamsValidator = require('../middleware/validators/requestParamsVa
  *
  * @returns meteors: list of meteors
  */
-router.get('/meteors', async (req, res, next) => {
+router.get('/meteors', validator.validate(requestParamsSchema, 'query'), async (req, res, next) => {
     try {
         const dateFrom = req.query.dateFrom;
         const dateTo = req.query.dateTo;
         const isTotalAmountRequired = req.query.isTotalAmountRequired;
         const wereDangerousMeteorsRequired = req.query.wereDangerousMeteorsRequired;
-        requestParamsValidator.validate(dateFrom, dateTo, isTotalAmountRequired, wereDangerousMeteorsRequired)
 
         const meteorsData = await useCase.getMeteors(isTotalAmountRequired, wereDangerousMeteorsRequired, dateFrom, dateTo);
 
-        res.render('../views/meteorsView.html', {meteorsData, dateFrom, dateTo});
+        res.status(200).render('../views/meteorsView.html', {meteorsData, dateFrom, dateTo});
     }
     catch (err) {
-        if (err instanceof ValidationException) {
-            next(new NasaProxyException(err.code, `Validation error: ${err.message}`))
-        }
-        next(new NasaProxyException(err.status, `Downstream error: ${err.message}`));
+        next(new NasaProxyError(err.status, `Downstream error: ${err.message}`));
     }
 });
 
