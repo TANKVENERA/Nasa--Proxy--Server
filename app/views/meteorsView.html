@@ -1,39 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <title>Meteors Page</title>
-        <h2>Meteors registered From Date: {{dateFrom}} To Date: {{dateTo}}</h2>
-        <style>
-            div {margin: auto; text-align: center; padding-top: 20px}
-            h2 {margin: auto; text-align: center;}
-        </style>
-    </head>
-    <body>
-        {% if meteorsData.totalCount %}
-        <div>
-            <h4>Total amount of seen meteors: {{meteorsData.totalCount}}</h4>
-        </div>
-        {% endif %}
-        {% if meteorsData.wereDangerousMeteors == true %}
-        <div>
-            <h4>Hazardous Meteors Are Present</h4>
-        </div>
-        {% endif %}
-        {% if meteorsData.wereDangerousMeteors == false %}
-        <div>
-            <h4>Hazardous Meteors Are Not Present</h4>
-        </div>
-        {% endif %}
-        <div>
-            {% for meteor in meteorsData.meteors %}
-            <div>
-                <h4>ID: {{meteor.id}}</h4>
-                <p>Name: {{meteor.name}}</p>
-                <p>Is Hazardous: {{meteor.isHazardous}}</p>
-                <p>Closest Approach Date: {{meteor.closestApproachDate}}</p>
-                <p>Velocity (km/sec): {{meteor.velocityKmPerSecond}}</p>
-            </div>
-            {% endfor %}
-        </div>
-    </body>
+  <head>
+    <title>Meteors Page</title>
+    <h2>Meteors registered From Date: {{dateFrom}} To Date: {{dateTo}}</h2>
+    <style>
+      div {
+        margin: auto;
+        text-align: center;
+        padding-top: 20px;
+      }
+      h2 {
+        margin: auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    {% if meteorsData.totalCount %}
+    <div>
+      <h4>Total amount of seen meteors: {{meteorsData.totalCount}}</h4>
+    </div>
+    {% endif %} {% if meteorsData.wereDangerousMeteors == true %}
+    <div>
+      <h4>Hazardous Meteors Are Present</h4>
+    </div>
+    {% endif %} {% if meteorsData.wereDangerousMeteors == false %}
+    <div>
+      <h4>Hazardous Meteors Are Not Present</h4>
+    </div>
+    {% endif %}
+    <div>
+      {% for meteor in meteorsData.meteors %}
+      <div>
+        <h4>ID: {{meteor.id}}</h4>
+        <p>Name: {{meteor.name}}</p>
+        <p>Is Hazardous: {{meteor.isHazardous}}</p>
+        <p>Closest Approach Date: {{meteor.closestApproachDate}}</p>
+        <p>Velocity (km/sec): {{meteor.velocityKmPerSecond}}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
 </html>

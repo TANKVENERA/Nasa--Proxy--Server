@@ -1,27 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <title>Main Page</title>
-        <h2>Welcome to NASA Simple API Integration.</h2>
-        <h3>Fill the form to look at the most recent photo from mars rover</h3>
-        <style>
-            div {margin: auto; text-align: center;}
-            h2, h3 {margin: auto; text-align: center;}
-        </style>
-    </head>
-    <body>
-        <div>
-            <form action="proxy/latestPhoto" method="POST">
-                <label>
-                    <input placeholder="User ID" type="text" name="userId">
-                </label><br><br>
-               <label>
-                   <input placeholder="User Name" type="text" name="userName">
-               </label><br><br>
-                <button>Submit</button>
-            </form>
-        </div>
-    </body>
+  <head>
+    <title>Main Page</title>
+    <h2>Welcome to NASA Simple API Integration.</h2>
+    <h3>Fill the form to look at the most recent photo from mars rover</h3>
+    <style>
+      div {
+        margin: auto;
+        text-align: center;
+      }
+      h2,
+      h3 {
+        margin: auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <form action="proxy/latestPhoto" method="POST">
+        <label>
+          <input placeholder="User ID" type="text" name="userId" /> </label
+        ><br /><br />
+        <label>
+          <input placeholder="User Name" type="text" name="userName" /> </label
+        ><br /><br />
+        <button>Submit</button>
+      </form>
+    </div>
+  </body>
 </html>
-
-
