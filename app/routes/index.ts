@@ -1,4 +1,5 @@
-const express = require("express");
+import express from "express";
+
 const router = express.Router();
 
 /**
@@ -8,4 +9,4 @@ router.get("/", (req, res) => {
   res.status(200).render("../views/indexView.html");
 });
 
-module.exports = router;
+export { router };
