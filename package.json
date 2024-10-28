@@ -14,6 +14,7 @@
   "description": "NASA API Integration Example",
   "main": "index.ts",
   "dependencies": {
+    "@sentry/node": "^8.35.0",
     "axios": "^1.7.7",
     "body-parser": "^1.20.3",
     "dotenv": "^16.4.5",

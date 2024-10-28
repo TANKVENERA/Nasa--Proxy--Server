@@ -4,8 +4,9 @@
 - [Description](#Description)
 - [Prerequisites](#Prerequisites)
 - [Installation](#Installation)
-- [How to](#How to)
+- [How to](#How-to)
 - [Usage](#Usage)
+- [Enable Errors Capture](#Enable-errors-capture)
 - [Contributing](#Contributing)
 
 ## Description
@@ -66,6 +67,18 @@ lint tool like **Eslint** and formatter tool like **Prettier**
    - Check the result:
      ![Response Example](static/readme-screenshot-3.png)
 
+## Enable Errors Capture
+To enable capturing of the errors with **Sentry** Monitoring Platform:
+1. Create account on [Sentry](https://sentry.io/signup/) and set up new node js project
+2. Go to Project -> Settings -> Client Keys and obtain your DSN key  
+   ![Response Example](static/readme-screenshot-4.png)  
+
+
+3. Create ```.env``` file and assign to the ```SENTRY_DSN``` your DSN key
+4. After that, all errors will be captured and sent to sentry monitoring tool:  
+
+
+   ![Response Example](static/readme-screenshot-5.png)
 
      
 ## Contributing

@@ -1,4 +1,5 @@
 import express from "express";
+import "./sentryInitializer.mjs";
 import { config } from "./app/config/config.js";
 import { router as indexRoute } from "./app/routes/index.js";
 import { router as meteorRoutes } from "./app/routes/meteorsRoute.js";
@@ -20,6 +21,7 @@ app.set("view engine", "html");
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/proxy", meteorRoutes);
 app.use("/proxy", photoRoutes);
